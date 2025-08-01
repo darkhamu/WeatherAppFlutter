@@ -64,15 +64,15 @@ class _WeatherNowDataState extends State<WeatherNowData> {
         Image.network('https:${data.iconUrl}', scale: 0.5),
         Text(
           weatherName,
-          style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w300),
+          style: const TextStyle(fontSize: 23, fontWeight: FontWeight.w300),
         ),
         Text(
           S.of(context).temperature_c(data.temperature),
-          style: const TextStyle(fontSize: 34, fontWeight: FontWeight.w700),
+          style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w700),
         ),
         Text(
           S.of(context).feels_like(data.feelsLikeTemp),
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
+          style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w300),
         ),
         const SizedBox(height: 16),
         Row(
@@ -105,7 +105,7 @@ class _WeatherNowDataState extends State<WeatherNowData> {
                       ),
                     ),
                     Text(
-                      S.of(context).wind_direction(data.windDirection),
+                      S.of(context).wind_direction(TranslationService().getWindDirectionTranslation(data.windDirection, context)),
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,

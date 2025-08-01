@@ -179,6 +179,61 @@ class S {
   String get nw {
     return Intl.message('NW', name: 'nw', desc: '', args: []);
   }
+
+  /// `NNE`
+  String get nne {
+    return Intl.message('NNE', name: 'nne', desc: '', args: []);
+  }
+
+  /// `ENE`
+  String get ene {
+    return Intl.message('ENE', name: 'ene', desc: '', args: []);
+  }
+
+  /// `ESE`
+  String get ese {
+    return Intl.message('ESE', name: 'ese', desc: '', args: []);
+  }
+
+  /// `SSE`
+  String get sse {
+    return Intl.message('SSE', name: 'sse', desc: '', args: []);
+  }
+
+  /// `SSW`
+  String get ssw {
+    return Intl.message('SSW', name: 'ssw', desc: '', args: []);
+  }
+
+  /// `WSW`
+  String get wsw {
+    return Intl.message('WSW', name: 'wsw', desc: '', args: []);
+  }
+
+  /// `WNW`
+  String get wnw {
+    return Intl.message('WNW', name: 'wnw', desc: '', args: []);
+  }
+
+  /// `NNW`
+  String get nnw {
+    return Intl.message('NNW', name: 'nnw', desc: '', args: []);
+  }
+
+  /// `Hourly`
+  String get hourly {
+    return Intl.message('Hourly', name: 'hourly', desc: '', args: []);
+  }
+
+  /// `For 3 days`
+  String get for_three_days {
+    return Intl.message(
+      'For 3 days',
+      name: 'for_three_days',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

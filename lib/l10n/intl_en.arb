@@ -16,5 +16,15 @@
   "ne": "NE",
   "se": "SE",
   "sw": "SW",
-  "nw": "NW"
+  "nw": "NW",
+  "nne": "NNE",
+  "ene": "ENE",
+  "ese": "ESE",
+  "sse": "SSE",
+  "ssw": "SSW",
+  "wsw": "WSW",
+  "wnw": "WNW",
+  "nnw": "NNW",
+  "hourly": "Hourly",
+  "for_three_days": "For 3 days"
 }

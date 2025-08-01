@@ -9,13 +9,6 @@ class DataModelInheritWidget extends InheritedWidget {
   final List<HourDataModel> hourDataModel;
   const DataModelInheritWidget({super.key, required super.child, required this.currentWeatherModel, required this.dayDataModel, required this.hourDataModel});
 
-  // static DataModelInheritWidget of(BuildContext context) {
-  //   final DataModelInheritWidget? result = context
-  //       .dependOnInheritedWidgetOfExactType<DataModelInheritWidget>();
-  //   assert(result != null, 'No DataModelInheritWidget found in context');
-  //   return result!;
-  // }
-
   @override
   bool updateShouldNotify(DataModelInheritWidget old) {
     return currentWeatherModel != old.currentWeatherModel;
