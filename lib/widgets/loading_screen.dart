@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:weather_app/widgets/glass_card.dart';
 
+import '../generated/l10n.dart';
+
 class LoadingScreen extends StatelessWidget {
   const LoadingScreen({super.key});
 
@@ -29,7 +31,7 @@ class LoadingScreen extends StatelessWidget {
                       repeat: true,
                       fit: BoxFit.contain,
                     ),
-                    const Text('Загружаем данные...', style: TextStyle(fontSize: 24, color: Colors.white, decoration: TextDecoration.none, fontWeight: FontWeight.w600),),
+                    Text(S.of(context).loading_data, style: const TextStyle(fontSize: 24, color: Colors.white, decoration: TextDecoration.none, fontWeight: FontWeight.w600),),
                     const SizedBox(height: 16,),
                   ],
                 ),

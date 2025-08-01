@@ -1,0 +1,20 @@
+{
+  "@@locale": "en",
+  "app_name": "WeatherApp",
+  "loading_data": "Loading data...",
+  "feels_like": "Feels like: {temp}°C",
+  "wind_speed": "{speed} km/h",
+  "wind_direction": "Direction: {windDirection}",
+  "temperature_c": "{temp}°C",
+  "avg_humidity": "The average humidity - {humidity}",
+  "max_wind_speed": "Max speed - {speed}km/h",
+  "current_moon_phase": "Current moon phase - {phase}",
+  "n": "N",
+  "s": "S",
+  "e": "E",
+  "w": "W",
+  "ne": "NE",
+  "se": "SE",
+  "sw": "SW",
+  "nw": "NW"
+}

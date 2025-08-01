@@ -3,6 +3,7 @@ import 'package:location/location.dart' as loc;
 import 'package:weather_app/models/current_weather_model.dart';
 import 'package:weather_app/models/day_data_model.dart';
 import 'package:weather_app/models/hour_data_model.dart';
+import 'package:weather_app/widgets/data_model_inherit_widget.dart';
 import 'package:weather_app/widgets/main_screen_widget.dart';
 
 import 'repository/location/location_repository.dart';
@@ -22,11 +23,6 @@ class _WeatherPageState extends State<WeatherPage> {
   CurrentWeatherModel? currentWeatherData;
   List<DayDataModel> dayData = [];
   List<HourDataModel> hourData = [];
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   Future<String> _initLocation() async {
     await checkPermissions(_location);
@@ -51,7 +47,11 @@ class _WeatherPageState extends State<WeatherPage> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const LoadingScreen();
         } else {
-          return MainScreenWidget(currentAddress: snapshot.data ?? '???',);
+          return DataModelInheritWidget(
+            currentWeatherModel: currentWeatherData!,
+            dayDataModel: dayData,
+            hourDataModel: hourData,
+            child: MainScreenWidget(currentAddress: snapshot.data ?? '???',));
         }
       },
     );

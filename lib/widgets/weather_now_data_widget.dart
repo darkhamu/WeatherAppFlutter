@@ -1,62 +1,112 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_app/models/current_weather_model.dart';
+import 'package:weather_app/widgets/data_model_inherit_widget.dart';
 
-class WeatherNowData extends StatelessWidget {
+import '../generated/l10n.dart';
+import '../repository/text_translate/translation_service.dart';
+
+class WeatherNowData extends StatefulWidget {
   const WeatherNowData({super.key});
 
   @override
+  State<WeatherNowData> createState() => _WeatherNowDataState();
+}
+
+class _WeatherNowDataState extends State<WeatherNowData> {
+  String weatherName = '';
+
+  Future<void> getWeatherName(String currentText) async {
+    final translated = await TranslationService.translate(currentText);
+    setState(() {
+      weatherName = translated;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final data = context
+          .dependOnInheritedWidgetOfExactType<DataModelInheritWidget>()
+          ?.currentWeatherModel;
+      if (data != null) {
+        getWeatherName(data.weatherName);
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Column(
+    CurrentWeatherModel data =
+        context
+            .dependOnInheritedWidgetOfExactType<DataModelInheritWidget>()
+            ?.currentWeatherModel ??
+            CurrentWeatherModel(
+              lastUpdate: '',
+              iconUrl:
+              '//www.freeiconspng.com/thumbs/load-icon-png/load-icon-png-8.png',
+              weatherName: '',
+              temperature: '',
+              feelsLikeTemp: '',
+              humidity: '',
+              windSpeed: '',
+              windDirection: '',
+            );
+    return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          '2025-07-28 18:00',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+          data.lastUpdate,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
         ),
-        Icon(Icons.cloud, size: 72, color: Colors.white),
+        Image.network('https:${data.iconUrl}', scale: 0.5),
         Text(
-          'Mist',
-          style: TextStyle(fontSize: 26, fontWeight: FontWeight.w300),
-        ),
-        Text(
-          '20.2°C',
-          style: TextStyle(fontSize: 34, fontWeight: FontWeight.w700),
+          weatherName,
+          style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w300),
         ),
         Text(
-          'Ощущается: 20.2°C',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
+          S.of(context).temperature_c(data.temperature),
+          style: const TextStyle(fontSize: 34, fontWeight: FontWeight.w700),
         ),
-        SizedBox(height: 16),
+        Text(
+          S.of(context).feels_like(data.feelsLikeTemp),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
+        ),
+        const SizedBox(height: 16),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
-                Icon(Icons.water_drop, color: Colors.white),
+                const Icon(Icons.water_drop, color: Colors.white),
                 Text(
-                  '78',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  data.humidity,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ],
             ),
             Row(
               children: [
-                Icon(CupertinoIcons.wind, color: Colors.white),
-                const SizedBox(width: 8,),
+                const Icon(CupertinoIcons.wind, color: Colors.white),
+                const SizedBox(width: 8),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '12.7 km/h',
-                      style: TextStyle(
+                      S.of(context).wind_speed(data.windSpeed),
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     Text(
-                      'Направление: СВ',
-                      style: TextStyle(
+                      S.of(context).wind_direction(data.windDirection),
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                       ),

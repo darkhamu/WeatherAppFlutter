@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/weather_page.dart';
 
 import 'day_data_widget.dart' show DayDataWidget;
 import 'glass_card.dart';
@@ -34,7 +35,7 @@ class MainScreenWidget extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const WeatherPage()),);},
             icon: const Icon(Icons.update, size: 28, color: Colors.white),
           ),
         ],
@@ -50,20 +51,20 @@ class MainScreenWidget extends StatelessWidget {
         ),
         child: const Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // const SizedBox(height: 12),
+                  // SizedBox(height: 12),
                   // SearchPoly(searchController: searchController),
-                  const SizedBox(height: 16),
-                  const GlassCard(child: WeatherNowData()),
-                  const SizedBox(height: 16),
-                  const GlassCard(child: DayDataWidget()),
-                  const SizedBox(height: 16),
-                  const GlassCard(child: HourDataWidget()),
-                  const SizedBox(height: 49),
+                  SizedBox(height: 16),
+                  GlassCard(child: WeatherNowData()),
+                  SizedBox(height: 16),
+                  GlassCard(child: DayDataWidget()),
+                  SizedBox(height: 16),
+                  GlassCard(child: HourDataWidget()),
+                  SizedBox(height: 49),
                 ],
               ),
             ),

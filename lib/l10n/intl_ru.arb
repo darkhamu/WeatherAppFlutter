@@ -1,0 +1,20 @@
+{
+  "@@locale": "ru",
+  "app_name": "WeatherApp",
+  "loading_data": "Загружаем данные...",
+  "feels_like": "Ощущается: {temp}°C",
+  "wind_speed": "{speed} км/ч",
+  "wind_direction": "Направление: {windDirection}",
+  "temperature_c": "{temp}°C",
+  "avg_humidity": "Средняя влажность - {humidity}",
+  "max_wind_speed": "Макс. скорость - {speed}км/ч",
+  "current_moon_phase": "Текущая фаза луны - {phase}",
+  "n": "С",
+  "s": "Ю",
+  "e": "В",
+  "w": "З",
+  "ne": "СВ",
+  "se": "ЮВ",
+  "sw": "ЮЗ",
+  "nw": "СЗ"
+}
