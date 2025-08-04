@@ -234,6 +234,21 @@ class S {
       args: [],
     );
   }
+
+  /// `Something went wrong... Check your internet connection`
+  String get something_went_wrong {
+    return Intl.message(
+      'Something went wrong... Check your internet connection',
+      name: 'something_went_wrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reload`
+  String get reload {
+    return Intl.message('Reload', name: 'reload', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,56 +1,66 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:weather_app/widgets/glass_card.dart';
+import '../generated/l10n.dart';
+import '../models/hour_data_model.dart';
 
 class HourDataWidget extends StatelessWidget {
-  const HourDataWidget({super.key});
+  final HourDataModel item;
+
+  const HourDataWidget({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
-    return const GlassCard(
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('00:00', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),),
-              Icon(Icons.sunny, color: Colors.white, size: 32,),
-              Text('13.0°C', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),),
-            ],
-          ),
-          Divider(),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.water_drop, color: Colors.white),
-                  const SizedBox(width: 2,),
-                  Text('78'),
-                ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(CupertinoIcons.wind, color: Colors.white),
-                  const SizedBox(width: 6,),
-                  Text('16.2 км/ч'),
-                ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(CupertinoIcons.cloud_rain_fill, color: Colors.white),
-                  const SizedBox(width: 6,),
-                  Text('78%'),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              item.time.substring(item.time.length - 5),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+            ),
+            Image.network('https:${item.iconURL}', scale: 1),
+            Text(
+              S.of(context).temperature_c(item.temperature),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+            ),
+          ],
+        ),
+        const Divider(),
+        const SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.water_drop, color: Colors.white),
+                const SizedBox(width: 2),
+                Text(item.humidity),
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(CupertinoIcons.wind, color: Colors.white),
+                const SizedBox(width: 6),
+                Text(S.of(context).wind_speed(item.windSpeed)),
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(
+                  CupertinoIcons.cloud_rain_fill,
+                  color: Colors.white,
+                ),
+                const SizedBox(width: 6),
+                Text('${item.chanceOfRain}%'),
+              ],
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

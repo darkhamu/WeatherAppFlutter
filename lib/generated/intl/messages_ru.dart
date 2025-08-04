@@ -52,8 +52,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "nne": MessageLookupByLibrary.simpleMessage("ССВ"),
     "nnw": MessageLookupByLibrary.simpleMessage("ССЗ"),
     "nw": MessageLookupByLibrary.simpleMessage("СЗ"),
+    "reload": MessageLookupByLibrary.simpleMessage("Перезагрузить"),
     "s": MessageLookupByLibrary.simpleMessage("Ю"),
     "se": MessageLookupByLibrary.simpleMessage("ЮВ"),
+    "something_went_wrong": MessageLookupByLibrary.simpleMessage(
+      "Что-то пошло не так... Проверьте свое подключение к интернету",
+    ),
     "sse": MessageLookupByLibrary.simpleMessage("ЮЮВ"),
     "ssw": MessageLookupByLibrary.simpleMessage("ЮЮЗ"),
     "sw": MessageLookupByLibrary.simpleMessage("ЮЗ"),

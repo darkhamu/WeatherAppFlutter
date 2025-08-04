@@ -1,66 +1,121 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:weather_app/widgets/glass_card.dart';
+import 'package:weather_app/models/day_data_model.dart';
 
-class DayDataWidget extends StatelessWidget {
-  const DayDataWidget({super.key});
+import '../generated/l10n.dart';
+import '../repository/text_translate/translation_service.dart';
+
+class DayDataWidget extends StatefulWidget {
+  final DayDataModel item;
+
+  const DayDataWidget({super.key, required this.item});
+
+  @override
+  State<DayDataWidget> createState() => _DayDataWidgetState();
+}
+
+class _DayDataWidgetState extends State<DayDataWidget> {
+  String weatherName = '';
+  String moonPhaseName = '';
+
+  Future<void> getWeatherName(String weather, String moonPhase) async {
+    final translated = await TranslationService.translate(weather);
+    final translatedMoonPhase = await TranslationService.translate(moonPhase);
+    setState(() {
+      weatherName = translated;
+      moonPhaseName = translatedMoonPhase;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getWeatherName(widget.item.weatherName, widget.item.moonPhase);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const GlassCard(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('2025-07-30',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.cloud, size: 64, color: Colors.white),
-              SizedBox(width: 10,),
-              Text(
-                'Туман',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          widget.item.data,
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.network('https:${widget.item.imageUrl}', scale: 1),
+            const SizedBox(width: 5),
+            Flexible(
+              child: Text(
+                weatherName,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
-            ],
-          ),
-          Text(
-            '13.3°C - 17.3°C',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
-          ),
-          SizedBox(height: 12,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.water_drop, color: Colors.white,),
-              SizedBox(width: 10,),
-              Text('Средняя влажность - 93', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),)
-            ],
-          ),
-          SizedBox(height: 6,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(CupertinoIcons.wind, color: Colors.white,),
-              SizedBox(width: 10,),
-              Text('Макс. - 26.3км/ч', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),)
-            ],
-          ),
-          SizedBox(height: 10,),
-          Divider(),
-          SizedBox(height: 10,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Icon(CupertinoIcons.sunrise_fill, color: Colors.white, size: 32,),
-              Text('05:21 - 21:11', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),),
-              Icon(CupertinoIcons.sunset_fill, color: Colors.white, size: 32,)
-            ],
-          ),
-          SizedBox(height: 10,),
-          Text('Текущая фаза луны - Растущий полумесяц', style: TextStyle(fontSize: 14),),
-        ],
-      ),
+            ),
+          ],
+        ),
+        Text(
+          '${S.of(context).temperature_c(widget.item.minTemp)} - ${S.of(context).temperature_c(widget.item.maxTemp)}',
+          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+        ),
+        const SizedBox(height: 12),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.water_drop, color: Colors.white),
+            const SizedBox(width: 10),
+            Text(
+              S.of(context).avg_humidity(widget.item.avgHumidity),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+            ),
+          ],
+        ),
+        const SizedBox(height: 6),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(CupertinoIcons.wind, color: Colors.white),
+            const SizedBox(width: 10),
+            Text(
+              S.of(context).max_wind_speed(widget.item.maxWindSpeed),
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+        const Divider(),
+        const SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Icon(
+              CupertinoIcons.sunrise_fill,
+              color: Colors.white,
+              size: 32,
+            ),
+            Text(
+              '${widget.item.sunriseTime} - ${widget.item.sunsetTime}',
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+            ),
+            const Icon(
+              CupertinoIcons.sunset_fill,
+              color: Colors.white,
+              size: 32,
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Text(
+          S.of(context).current_moon_phase(moonPhaseName),
+          style: const TextStyle(fontSize: 14),
+        ),
+      ],
     );
   }
 }

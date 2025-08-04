@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/weather_page.dart';
 
 import '../generated/l10n.dart';
-import 'day_data_widget.dart' show DayDataWidget;
+import 'day_weather_widget.dart' show DayWeatherWidget;
 import 'glass_card.dart';
-import 'hour_data_widget.dart';
+import 'hour_weather_widget.dart';
 import 'weather_now_data_widget.dart';
 
 class MainScreenWidget extends StatelessWidget {
@@ -102,17 +102,13 @@ class MainScreenWidget extends StatelessWidget {
                       const Expanded(
                         child: TabBarView(
                           children: [
-                            SingleChildScrollView(
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                                child: HourDataWidget(),
-                              ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 16),
+                              child: HourWeatherWidget(),
                             ),
-                            SingleChildScrollView(
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                                child: DayDataWidget(),
-                              ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 16),
+                              child: DayWeatherWidget(),
                             ),
                           ],
                         ),

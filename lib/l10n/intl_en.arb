@@ -26,5 +26,7 @@
   "wnw": "WNW",
   "nnw": "NNW",
   "hourly": "Hourly",
-  "for_three_days": "For 3 days"
+  "for_three_days": "For 3 days",
+  "something_went_wrong": "Something went wrong... Check your internet connection",
+  "reload": "Reload"
 }

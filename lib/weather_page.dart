@@ -9,6 +9,7 @@ import 'package:weather_app/widgets/main_screen_widget.dart';
 import 'repository/location/location_repository.dart';
 import 'repository/location/permission_repository.dart';
 import 'repository/weather_data/weather_data_repository.dart';
+import 'widgets/error_screen.dart';
 import 'widgets/loading_screen.dart';
 
 class WeatherPage extends StatefulWidget {
@@ -46,7 +47,11 @@ class _WeatherPageState extends State<WeatherPage> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const LoadingScreen();
-        } else {
+        }
+        else if(snapshot.hasError) {
+          return const ErrorScreen();
+        }
+        else {
           return DataModelInheritWidget(
             currentWeatherModel: currentWeatherData!,
             dayDataModel: dayData,
