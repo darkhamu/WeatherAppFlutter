@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:weather_app/app_data/app_data.dart';
 import 'package:weather_app/models/current_weather_model.dart';
 
@@ -62,9 +61,6 @@ class WeatherDataRepository {
         ),
       );
     }
-    // for (var item in hourDataList) {
-
-    // }
 
     return (currentWeatherModel, daysWeatherData, hourDataList);
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:location/location.dart' as loc;
 import 'package:weather_app/models/current_weather_model.dart';
 import 'package:weather_app/models/day_data_model.dart';
 import 'package:weather_app/models/hour_data_model.dart';
@@ -20,24 +19,32 @@ class WeatherPage extends StatefulWidget {
 }
 
 class _WeatherPageState extends State<WeatherPage> {
-  final loc.Location _location = loc.Location();
-  CurrentWeatherModel? currentWeatherData;
+  CurrentWeatherModel currentWeatherData = CurrentWeatherModel(
+    lastUpdate: 'lastUpdate',
+    iconUrl: 'iconUrl',
+    weatherName: 'weatherName',
+    temperature: 'temperature',
+    feelsLikeTemp: 'feelsLikeTemp',
+    humidity: 'humidity',
+    windSpeed: 'windSpeed',
+    windDirection: 'windDirection',
+  );
   List<DayDataModel> dayData = [];
   List<HourDataModel> hourData = [];
 
   Future<String> _initLocation() async {
-    await checkPermissions(_location);
-    final location = await getLocation(_location);
+    await checkPermissions();
+    final position = await getCurrentPosition();
 
     final result = await WeatherDataRepository().getWeatherData(
-      location!.latitude.toString(),
-      location.longitude.toString(),
+      position.latitude.toString(),
+      position.longitude.toString(),
     );
     currentWeatherData = result.$1;
     dayData = result.$2;
     hourData = result.$3;
 
-    return await getAddressFromLatLng(location);
+    return await getAddressFromLatLng(position);
   }
 
   @override
@@ -47,17 +54,15 @@ class _WeatherPageState extends State<WeatherPage> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const LoadingScreen();
-        }
-        else if(snapshot.hasError) {
-          print(snapshot.error.toString());
+        } else if (snapshot.hasError) {
           return ErrorScreen(errorMessage: snapshot.error.toString());
-        }
-        else {
+        } else {
           return DataModelInheritWidget(
-            currentWeatherModel: currentWeatherData!,
+            currentWeatherModel: currentWeatherData,
             dayDataModel: dayData,
             hourDataModel: hourData,
-            child: MainScreenWidget(currentAddress: snapshot.data ?? '???',));
+            child: MainScreenWidget(currentAddress: snapshot.data ?? '???'),
+          );
         }
       },
     );

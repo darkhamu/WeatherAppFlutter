@@ -31,7 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_localizations: 
+  flutter_localizations:
     sdk: flutter
 
   # The following adds the Cupertino Icons font to your application.
@@ -39,12 +39,12 @@ dependencies:
   cupertino_icons: ^1.0.8
   geocoding: ^4.0.0
   geolocator: ^14.0.2
-  location: ^8.0.1
   dio: ^5.8.0+1
   lottie: ^3.3.1
   flutter_svg: ^2.2.0
   http: ^1.4.0
   intl: ^0.20.2
+  flutter_launcher_icons: ^0.14.4
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +70,7 @@ flutter:
   assets:
     - assets/json/load_animation.json
     - assets/background.jpg
+    - assets/icon/icon.jpg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -99,3 +100,8 @@ flutter:
   # see https://flutter.dev/to/font-from-package
 flutter_intl:
   enabled: true
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/icon.jpg"

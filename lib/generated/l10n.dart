@@ -235,10 +235,10 @@ class S {
     );
   }
 
-  /// `Something went wrong... Check your internet connection`
+  /// `Something went wrong...`
   String get something_went_wrong {
     return Intl.message(
-      'Something went wrong... Check your internet connection',
+      'Something went wrong...',
       name: 'something_went_wrong',
       desc: '',
       args: [],

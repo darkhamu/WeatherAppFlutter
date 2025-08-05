@@ -56,7 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "s": MessageLookupByLibrary.simpleMessage("Ю"),
     "se": MessageLookupByLibrary.simpleMessage("ЮВ"),
     "something_went_wrong": MessageLookupByLibrary.simpleMessage(
-      "Что-то пошло не так... Проверьте свое подключение к интернету",
+      "Что-то пошло не так...",
     ),
     "sse": MessageLookupByLibrary.simpleMessage("ЮЮВ"),
     "ssw": MessageLookupByLibrary.simpleMessage("ЮЮЗ"),

@@ -56,7 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "s": MessageLookupByLibrary.simpleMessage("S"),
     "se": MessageLookupByLibrary.simpleMessage("SE"),
     "something_went_wrong": MessageLookupByLibrary.simpleMessage(
-      "Something went wrong... Check your internet connection",
+      "Something went wrong...",
     ),
     "sse": MessageLookupByLibrary.simpleMessage("SSE"),
     "ssw": MessageLookupByLibrary.simpleMessage("SSW"),
