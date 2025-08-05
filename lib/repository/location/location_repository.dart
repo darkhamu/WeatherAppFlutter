@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart' hide Location;
 import 'package:location/location.dart';
 
-import '../weather_data/weather_data_repository.dart';
-
 Future<LocationData?> getLocation(Location location) async {
   try {
     final locationData = await location.getLocation();

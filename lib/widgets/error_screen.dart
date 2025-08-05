@@ -6,7 +6,8 @@ import '../weather_page.dart';
 import 'glass_card.dart';
 
 class ErrorScreen extends StatelessWidget {
-  const ErrorScreen({super.key});
+  final String errorMessage;
+  const ErrorScreen({super.key, required this.errorMessage});
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,18 @@ class ErrorScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontSize: 24,
+                        color: Colors.white,
+                        decoration: TextDecoration.none,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      errorMessage,
+                      maxLines: 7,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 16,
                         color: Colors.white,
                         decoration: TextDecoration.none,
                         fontWeight: FontWeight.w600,

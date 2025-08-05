@@ -49,7 +49,8 @@ class _WeatherPageState extends State<WeatherPage> {
           return const LoadingScreen();
         }
         else if(snapshot.hasError) {
-          return const ErrorScreen();
+          print(snapshot.error.toString());
+          return ErrorScreen(errorMessage: snapshot.error.toString());
         }
         else {
           return DataModelInheritWidget(
